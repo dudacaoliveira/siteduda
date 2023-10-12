@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Formulário</title>
+</head>
+<body>
+
+
+<div class="container2">
+
+
+
+<div class="container" name="formcontato" method="POST" action="salva_mensagem.php">
+
+	<div class="cabeca" >
+		<div style="padding-left: 20px;padding-top: 10px;">
+		<h4>Formulário <br> para compras de</h4>
+		<h3>Pacote de adesivos</h3>
+		</div>
+	</div>
+	<div class="form-horizontal">
+		
+		<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">
+						Nome: 
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="nome" placeholder="Nome Completo" 
+						<?php
+							if(!empty($_SESSION['value_nome'])){
+								echo "value='".$_SESSION['value_nome']."'";
+								unset($_SESSION['value_nome']);
+							}
+						 ?>	>
+						 <?php
+							if(!empty($_SESSION['vazio_nome'])){
+								echo "<p style='color: #f00; '>".$_SESSION['vazio_nome']."</p>";
+								unset($_SESSION['vazio_nome']);
+							}
+						 ?>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="email" class="col-sm-2 control-label">
+						E-mail: 
+					</label>
+					<div class="col-sm-10">
+						 <input type="email" class="form-control" name="email" placeholder="Seu melhor e-mail" 
+						<?php
+							if(!empty($_SESSION['value_email'])){
+								echo "value='".$_SESSION['value_email']."'";
+								unset($_SESSION['value_email']);
+							}
+						 ?>>
+						 <?php
+							if(!empty($_SESSION['vazio_email'])){
+								echo "<p style='color: #f00; '>".$_SESSION['vazio_email']."</p>";
+								unset($_SESSION['vazio_email']);
+							}
+						 ?>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="assunto" class="col-sm-2 control-label">
+						Assunto: 
+					</label>
+					<div class="col-sm-10">
+						 <input type="text" class="form-control" name="assunto" placeholder="Assunto do contato" 
+						<?php
+							if(!empty($_SESSION['value_assunto'])){
+								echo "value='".$_SESSION['value_assunto']."'";
+								unset($_SESSION['value_assunto']);
+							}
+						 ?>>
+						 <?php
+							if(!empty($_SESSION['vazio_assunto'])){
+								echo "<p style='color: #f00; '>".$_SESSION['vazio_assunto']."</p>";
+								unset($_SESSION['vazio_assunto']);
+							}
+						 ?>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="mensagem" class="col-sm-2 control-label">
+						Mensagem: 
+					</label>
+					<div class="col-sm-10">
+						<?php
+							if(!empty($_SESSION['value_mensagem'])){ ?>
+								<textarea class="form-control" name="mensagem"><?php echo $_SESSION['value_mensagem']; ?></textarea>
+								<?php
+								unset($_SESSION['value_mensagem']);
+							}else{ ?>
+								<textarea class="form-control" name="mensagem"></textarea>
+							<?php }
+						?>
+						 <?php
+							if(!empty($_SESSION['vazio_mensagem'])){
+								echo "<p style='color: #f00; '>".$_SESSION['vazio_mensagem']."</p>";
+								unset($_SESSION['vazio_mensagem']);
+							}
+						 ?>
+					</div>
+				</div>
+				
+				<input class="btn btn-success" type="submit" value="Enviar" onclick="return validar_form_contato()">
+
+
+	</div>
+	<div class="footer">
+		<button class="button">ENVIAR</button>
+	</div>
+</div>
+
+
+
+
+
+</body>
+</html>
