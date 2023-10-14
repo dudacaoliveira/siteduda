@@ -1,3 +1,5 @@
+<?php
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,117 +8,127 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Formulário</title>
 </head>
+
+<script type="text/javascript">
+	
+	numero = 0;
+	
+	function less() {
+	  numero--;
+	  setValue(numero);
+	}
+	
+	function more() {
+	  numero++;
+	  setValue(numero);
+	}
+	
+	function setValue(value) {
+	  document.getElementById('num').value = value;
+	  if(value<0){
+		  document.getElementById('num').value = 0;
+		  numero = 0;
+	  }
+	}
+	
+	setValue(numero);
+	
+	
+	function insert(){
+		window.alert(numero + " Adesivo(s) solicitados dos selecionados!");
+	}
+	
+	
+	</script>
+
 <body>
 
 
-<div class="container2">
+	<div class="container2">
 
 
 
-<div class="container" name="formcontato" method="POST" action="salva_mensagem.php">
-
-	<div class="cabeca" >
-		<div style="padding-left: 20px;padding-top: 10px;">
-		<h4>Formulário <br> para compras de</h4>
-		<h3>Pacote de adesivos</h3>
-		</div>
-	</div>
-	<div class="form-horizontal">
+		<div class="container" name="formcontato" method="POST" action="salva.php">
 		
-		<div class="form-group">
-					<label for="nome" class="col-sm-2 control-label">
-						Nome: 
-					</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="nome" placeholder="Nome Completo" 
-						<?php
-							if(!empty($_SESSION['value_nome'])){
-								echo "value='".$_SESSION['value_nome']."'";
-								unset($_SESSION['value_nome']);
-							}
-						 ?>	>
-						 <?php
-							if(!empty($_SESSION['vazio_nome'])){
-								echo "<p style='color: #f00; '>".$_SESSION['vazio_nome']."</p>";
-								unset($_SESSION['vazio_nome']);
-							}
-						 ?>
-					</div>
+			<div class="cabeca" >
+				<div class="cabeca" >
+				<div style=" background-color: transparent; width: 200px; padding-left: 20px;padding-top: 10px;">
+				<h4>Formulário <br> para compras de</h4>
+				<h3>Pacote de adesivos</h3>
 				</div>
 				
-				<div class="form-group">
-					<label for="email" class="col-sm-2 control-label">
-						E-mail: 
-					</label>
-					<div class="col-sm-10">
-						 <input type="email" class="form-control" name="email" placeholder="Seu melhor e-mail" 
-						<?php
-							if(!empty($_SESSION['value_email'])){
-								echo "value='".$_SESSION['value_email']."'";
-								unset($_SESSION['value_email']);
-							}
-						 ?>>
-						 <?php
-							if(!empty($_SESSION['vazio_email'])){
-								echo "<p style='color: #f00; '>".$_SESSION['vazio_email']."</p>";
-								unset($_SESSION['vazio_email']);
-							}
-						 ?>
-					</div>
-				</div>
+				<div><img class="img" src="img/box.png"></div>
 				
-				<div class="form-group">
-					<label for="assunto" class="col-sm-2 control-label">
-						Assunto: 
-					</label>
-					<div class="col-sm-10">
-						 <input type="text" class="form-control" name="assunto" placeholder="Assunto do contato" 
-						<?php
-							if(!empty($_SESSION['value_assunto'])){
-								echo "value='".$_SESSION['value_assunto']."'";
-								unset($_SESSION['value_assunto']);
-							}
-						 ?>>
-						 <?php
-							if(!empty($_SESSION['vazio_assunto'])){
-								echo "<p style='color: #f00; '>".$_SESSION['vazio_assunto']."</p>";
-								unset($_SESSION['vazio_assunto']);
-							}
-						 ?>
-					</div>
-				</div>
+			</div>
 				
-				<div class="form-group">
-					<label for="mensagem" class="col-sm-2 control-label">
-						Mensagem: 
-					</label>
-					<div class="col-sm-10">
-						<?php
-							if(!empty($_SESSION['value_mensagem'])){ ?>
-								<textarea class="form-control" name="mensagem"><?php echo $_SESSION['value_mensagem']; ?></textarea>
-								<?php
-								unset($_SESSION['value_mensagem']);
-							}else{ ?>
-								<textarea class="form-control" name="mensagem"></textarea>
-							<?php }
-						?>
-						 <?php
-							if(!empty($_SESSION['vazio_mensagem'])){
-								echo "<p style='color: #f00; '>".$_SESSION['vazio_mensagem']."</p>";
-								unset($_SESSION['vazio_mensagem']);
-							}
-						 ?>
-					</div>
-				</div>
+			</div>
+			<div class="form-horizontal">
 				
-				<input class="btn btn-success" type="submit" value="Enviar" onclick="return validar_form_contato()">
-
-
-	</div>
-	<div class="footer">
-		<button class="button">ENVIAR</button>
-	</div>
-</div>
+				<div >
+							<label class="col-sm-2 control-label">
+								Quais adesivos: 
+							</label>
+		
+							<div class="spacer"></div>
+		
+							<div class="col-sm-10">
+							
+								<div>
+									<input class="input" type="checkbox" name="scales" value="1">
+									<label for="scales">React</label>
+								</div>
+		
+								<div>
+									<input type="checkbox" name="scales" value="2">
+									<label for="scales">Vue</label>
+								</div>
+		
+								<div>
+									<input type="checkbox"  name="scales" value="3">
+									<label for="scales">Angular</label>
+								</div>
+		
+							</div>
+						</div>
+		
+						<div class="spacer"></div>
+						
+						<div >
+							<label>
+								Quantos Adesivos de cada: 
+							</label>
+		
+						</div>
+		
+						<div style="margin-top: 10px;">
+							
+							<button type="button" class="btnContador" onclick="less();">-</button>
+							<input class="inputNumber" id="num">
+							<button type="button" class="btnContador" onclick="more();">+</button>
+		
+						</div>
+		
+						<div class="spacer"></div>
+						
+		
+						
+						<div >
+							<label for="mensagem" class="col-sm-2 control-label">
+								Observações: 
+							</label>
+							<div style="margin-top: 10px;">
+								 
+							</div>
+						</div>
+						
+						<!-- <input class="btn btn-success" type="submit" value="Enviar" onclick="return validar_form_contato()"> -->
+		
+		
+			</div>
+			<div class="footer">
+				<input class="button" type="submit" value="ENVIAR" onclick="return insert();"></button>
+			</div>
+		</div>
 
 
 
